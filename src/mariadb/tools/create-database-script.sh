@@ -1,9 +1,9 @@
 #!/bin/bash
 
-DB_NAME=thedatabase
-DB_USER=theuser
-DB_PASSWORD=abc
-DB_PASS_ROOT=123
+DB_NAME=wordpress
+DB_USER=mpinna-l
+DB_PASSWORD=123456
+DB_PASS_ROOT=secret
 
 service mariadb start
 
