@@ -1,0 +1,11 @@
+# Compose syntaxe version
+version: '3.8'
+
+
+# my services
+services:
+  mariadb:
+    build:
+      context:  requirements/mariadb/.
+    env_file:
+      - .env

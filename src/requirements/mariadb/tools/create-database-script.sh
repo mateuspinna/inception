@@ -1,19 +1,14 @@
 #!/bin/bash
 
-DB_NAME=wordpress
-DB_USER=mpinna-l
-DB_PASSWORD=123456
-DB_PASS_ROOT=secret
-
 service mariadb start
 
-mariadb -v -u root << EOF
+mariadb -v -u root << 42BABY
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
 GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
 GRANT ALL PRIVILEGES ON $DB_NAME.* TO 'root'@'%' IDENTIFIED BY '$DB_PASS_ROOT';
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$DB_PASS_ROOT');
-EOF
+42BABY
 
 sleep 5
 
