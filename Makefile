@@ -3,7 +3,7 @@ COMPOSE_PATH = ./src/docker-compose.yml
 all: up
 
 up:
-	@docker compose -f $(COMPOSE_PATH) up -d
+	@docker compose -f $(COMPOSE_PATH) up -d --build
 
 down: stop
 	@docker compose -f $(COMPOSE_PATH) down

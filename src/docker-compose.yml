@@ -1,27 +1,24 @@
-# Compose syntaxe version
 version: '3.8'
 
-
-# my services
 services:
   mariadb:
     container_name: mariadb
     build:
-      context:  requirements/mariadb/.
+      context: requirements/mariadb/.
     env_file:
       - .env
-    ports: 
-      - "3306"
+    ports:
+      - "3306:3306"
     volumes:
       - mariadb_volume_data:/var/lib/mysql
     networks:
       - internet
-  
+
   nginx:
     container_name: nginx
     build:
-      context:  requirements/nginx/.
-    ports: 
+      context: requirements/nginx/.
+    ports:
       - "443:443"
     volumes:
       - wordpress_volume_data:/var/www/html/wp
@@ -31,9 +28,11 @@ services:
   wordpress:
     container_name: wordpress
     build:
-      context:  requirements/wordpress/.
-    ports: 
-      - "9000"
+      context: requirements/wordpress/.
+    env_file:
+      - .env
+    ports:
+      - "9000:9000"
     volumes:
       - wordpress_volume_data:/var/www/html/wp
     networks:
@@ -42,21 +41,18 @@ services:
 networks:
   internet:
     driver: bridge
-        
+
 volumes:
   wordpress_volume_data:
     driver: local
     driver_opts:
-      type: nome
+      type: none
       o: bind
-      device: /home/mateus/wp
+      device: /home/mateus/Desktop/wp
 
   mariadb_volume_data:
     driver: local
     driver_opts:
-      type: nome
+      type: none
       o: bind
-      device: /home/mateus/mdb
-
-
-
+      device: /home/mateus/Desktop/mdb
