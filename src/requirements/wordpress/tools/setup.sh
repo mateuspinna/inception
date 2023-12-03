@@ -5,14 +5,19 @@ echo "switch to /wp"
 
 cd /var/www/html/wp
 
+echo $DOMAIN_NAME
 
 echo "Installing and starting WordPress"
         wget  --no-check-certificate -q -O - https://wordpress.org/latest.tar.gz | tar -xz -C /var/www/html/wp --strip-components=1
         chmod -R +rwx /var/www/html/wp
 
+        echo "Cria config"
         wp --path=/var/www/html/wp --allow-root config create --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_PASSWORD" --dbhost="mariadb":"3306" --dbprefix='wp_'
+        echo "Instala core"
         wp --path=/var/www/html/wp --allow-root core install --url="$DOMAIN_NAME" --title="$WORDPRESS_SITE_NAME" --admin_user="$WP_ADMIN_USER" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="$WP_ADMIN_EMAIL"
-        wp --path=/var/www/html/wp --allow-root user create "$WP_USER_EDITOR" "$WP_EMAIL_EDITOR" --role='editor' --user_pass="$WP_PASSWORD_EDITOr"
+        echo "Cria usuario editor"
+        wp --path=/var/www/html/wp --allow-root user create "$WP_USER_EDITOR" "$WP_EMAIL_EDITOR" --role='editor' --user_pass="$WP_PASSWORD_EDITOR"
+        echo "Cria usuario"
         wp --path=/var/www/html/wp --allow-root user create "$WP_USER" "$WP_EMAIL" --role='subscriber' --user_pass="$WP_PASSWORD"
 fi
 
